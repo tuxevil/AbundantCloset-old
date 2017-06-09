@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+   <title>Abundant Closet - Work Your Wardrobe</title>
+   <link rel="stylesheet" type="text/css" href="css/grids-min.css" />    
+   <link rel="stylesheet" href="css/main.css" type="text/css" />
+   <link type="text/css" href="css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" />	
+  
+   <script language="javascript" src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery.validate.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery.bt.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery.filestyle.js" type="text/javascript"></script>
+   <script language="javascript" src="js/common.js" type="text/javascript"></script>
+   
+   <script language="javascript" type="text/javascript">
+        
+        $(document).ready(function() {
+            $("fieldset em").css("cursor","pointer").bt({ positions: 'top' });
+            
+            $("#frmRegister").validate({
+                  errorElement:'span',
+                  rules: {
+                    file1: {
+                       required:true
+                    },                    
+                  },
+                });
+            
+             $("input[type=file]").filestyle({ 
+                 image: "img/btn-browse.gif",
+                 imageheight : 29,
+                 imagewidth : 72,
+                 width : 200
+             });
+        });
+        
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="right">
+        <img src="img/ban180x150.gif" class="bantop" width="180" height="150" alt="Banner 180x150" />
+        <img src="img/ban160x600.gif" class="banlarge" width="160" height="600" alt="Banner 180x150" />
+	</div>
+    <div id="left">
+        <div id="main">
+            <div id="header">
+                <div id="subhd">
+                    <a href="index.htm" class="logo"><img src="img/lgo_abundant.png" height="75" width="276" alt="Abundant Closet - Work your wardrobe" /></a>
+                    <div id="credentials">
+                        <div class="bigtext">WELCOME</div>
+                        WOULD YOU LIKE TO <a href="signin.htm">SIGN IN?</a>
+                    </div>
+                </div>
+                
+                <div id="menu">
+                    <ul>
+                        <li class="current"><a href="build1.htm">Build your Closet</a></li>
+                        <li><a href="mycloset.htm">My Closet</a></li>
+                        <li><a href="public_closet.htm">Public Closet</a></li>
+                        <li><a href="blog.htm">Organizing/Styling</a></li>
+                    </ul>
+                </div>            
+            </div>
+            <div id="content" class="cont-twocol">
+            
+            <div class="leftbar">
+                <div style="background:#8E9DBE; text-align:center;">
+                    <img src="img/lb_classic.jpg" />
+                    <img src="img/lb_trendy.jpg" />
+                </div>
+                
+                <ul>
+                <li><a href="#">SELECT GARMENTS</a></li>
+                <li><a href="#">CREATE ACCOUNT</a></li>
+                <li><a href="#" class="current">UPLOAD IMAGES</a></li>
+                <li><a href="#">OTHER COLLECTIONS</a></li>
+                </ul>
+                
+                <div class="blognote">
+                    <div class="container">
+                        <h1>Spring/Summer 09 Trend Report</h1>
+                        <img src="img/img_blognote.gif" width="122" height="82" alt="Color of the Moment" border="0" />
+                        <p>Resident Co-Style Director Davee Troublefield shares his take on what’s ahead for spring and summer.</p>
+                        <p style="text-align:right;"><a href="blog.htm">Read more</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="rightbar" class="build-closet-step-1">
+                
+                <h1 class="heading">
+                    <span class="step">STEP <em>1</em></span> <span class="step">STEP<em>2</em></span> <span class="step-current">STEP<em>3</em></span>
+                </h1>
+
+                <h2 class="heading">
+                    Upload images of your own clothes
+                </h2>
+                
+                <h4 class="heading">
+                    Get <a href="#">recommendations</a> for taking photos of your personal garments.
+                </h4>
+                
+                <h4 class="computer">
+                    <b>From your computer:</b> (Click "browse" to select an image)
+                </h4>
+                
+                <form id="frmRegister" action="build4-1.htm" method="get">
+                <fieldset class="fileuploads">
+                <div><label>Garment #1 *</label><input type="file" id="file1" name="file1" /></div>
+                <div><label>Garment #2</label><input type="file" name="file2" /></div>
+                <div><label>Garment #3</label><input type="file" name="file3" /></div>
+                <div><label>Garment #4</label><input type="file" name="file4" /></div>
+                <div><label>Garment #5</label><input type="file" name="file5"  /></div>
+                </fieldset>
+
+                <h4 class="mobile">
+                    <b>From your mobile phone:</b> Send text messages to <b>#####</b>
+                </h4>
+                
+                <div class="info-blue">
+                To upload images from your mobile phone, you must provide your mobile phone number in your registration to submit images via mobile phone.
+                Please note that images submitted by mobile phone may not be inmediately available. To view uploaded images, visit <a href="#">www.abundantcloset.com/upload</a>.
+                </div>
+
+                <div id="taberror" class="alerterror">Some errors were encountered. Review them before processing.</div>
+           
+                <center style="margin:13px;">
+                    <input type="submit" class="button" name="submit" value="Add Images" />&nbsp;&nbsp;<input type="submit" class="button" name="submit" value="Skip and View Outfits" />
+                </center>
+                </form>
+                
+                </div>
+            </div>
+            <div id="footer">
+                <div class="links">
+                <ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Terms of Use</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <li><a href="">Sitemap</a></li>
+                </ul>
+                </div>
+                <span class="copyright">COPYRIGHT © 2009 ABUNDANT CLOSET LLC - ALL RIGHTS RESERVED</span>            
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

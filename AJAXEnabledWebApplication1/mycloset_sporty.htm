@@ -1,0 +1,763 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+   <title>Abundant Closet - Work Your Wardrobe</title>
+   <link rel="stylesheet" type="text/css" href="css/grids-min.css" />    
+   <link rel="stylesheet" href="css/main.css" type="text/css" />
+   <script language="javascript" src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/common.js" type="text/javascript"></script>
+   <link type="text/css" href="css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" />	
+   <script language="javascript" type="text/javascript">
+    $(document).ready(function() {
+        $("#btnBuildCloset").css("cursor","pointer").click(goToStep2);
+        
+        // Shows the corresponding hidden div when a tab is clicked.
+        $(".tab-menu ul li a").not(".more").css("cursor", "pointer").click(function() {
+            $("#tabs .tab-container").hide();
+            $(".tab-menu ul li a.current").removeClass("current").addClass("visited");
+            $(this).addClass("current");
+            var divToShow = $($(this).attr("name"));
+            divToShow.show("highlight",{},1000);
+        });
+        
+		// there's the gallery and the trash
+		var $gallery = $('.tab-container').eq(0), $wishlist = $('#wishlist'), $shoppinglist = $('#shoppinglist');
+
+		// let the gallery items be draggable
+		$('div.item').draggable({
+			cancel: 'a.ui-icon',// clicking an icon won't initiate dragging
+			revert: 'invalid', // when not dropped, the item will revert back to its initial position
+			containment: 'document', // stick to demo-frame if present
+			opacity: 0.7,
+			helper: cloneMe,
+			cursor: 'auto'
+		});
+		
+		// let the trash be droppable, accepting the gallery items
+		$wishlist.droppable({
+			accept: 'div.item',
+			hoverClass: 'ui-state-highlight',
+			tolerance: 'touch',
+			drop: function(ev, ui) {
+				addItem(ui.draggable, $("#wishlist .container"),true);
+			}
+		});
+		
+		// let the trash be droppable, accepting the gallery items
+		$shoppinglist.droppable({
+			accept: 'div.item',
+			hoverClass: 'ui-state-highlight',
+			tolerance: 'touch',
+			drop: function(ev, ui) {
+				addItem(ui.draggable, $("#shoppinglist .container"),false);
+			}
+		});
+		
+		$("input:check").click(checkboxPush);
+    });
+    
+    function goToStep2() 
+    {
+        $("#taberror").hide();
+        var visited = $("#tabs ul li a.visited").length;
+        var valid = true;
+        
+        if ( visited >= 5) 
+            window.location = "mycloset.htm";
+        else 
+             $("#taberror").show('highlight',{},4000).hide('highlight',{},2000);
+    }
+    
+    /* Clones the draggable item and sets a fixed width to correctly show on major browsers */
+	function cloneMe(ev) 
+	{
+	    return $(this).clone().width("150px");
+	}
+    
+    /* Executes when any check is clicked in the list */
+    function checkboxPush() 
+    {
+        var checked = ($(this).is(":checked"));
+        var $item = $(this).parents("div.item");
+        
+        if ($(this).hasClass("list") )
+            if (checked) 
+                addItem($item, $("#wishlist .container"),true);
+            else
+                removeFromCheck($item, $("#wishlist .container"), true);
+        else if ($(this).hasClass("buy") )
+            if (checked) 
+                addItem($item, $("#shoppinglist .container"),false);
+            else
+                removeFromCheck($item, $("#shoppinglist .container"), false);
+    }
+
+    /* Helper for id differential on each droppable list */
+    function cl(wishlist)
+    {
+        if (wishlist)
+            return "wl_";
+        else
+            return "el_";
+    }
+    
+    /* Adds an item to the list */
+	function addItem($item, $list, wishlist) 
+	{
+	    if ($("#" + cl(wishlist) + $item.attr("id"), $list).length > 0) 
+	    {
+	        $item.draggable('option', 'revert', true);
+	        return;
+	    }
+	    
+		$currentItem = $item.children("h1").eq(0).clone();
+		$currentItem.attr("id", cl(wishlist) + $item.attr("id"));
+		$linkClose = $("<a></a>").addClass("remove").text("[x]").click(removeItem).css("cursor","pointer");
+		$currentItem.append($linkClose);
+		
+		if (wishlist) 
+		{
+            $item.find(":check .list").attr("checked","checked");
+		}
+		else
+		{
+            $item.find(":check .buy").attr("checked","checked");
+		}
+		
+		$currentItem.appendTo($list).fadeIn();
+	}
+
+    /* Remove item from the list when clicked on it*/
+	function removeItem() 
+	{   
+        var itemid = $(this).parent().attr("id").replace(cl(1),"").replace(cl(0),"");
+	
+	    $item = $("div.item#" + itemid);
+        
+        if ($(this).parents("#wishlist").length > 0)
+            $item.find(":check .list").attr("checked","");
+	    else
+	        $item.find(":check .buy").attr("checked","");
+	        
+        $item.draggable('option', 'revert', false);
+	    $(this).parent().fadeOut().remove();
+	}   
+	
+    /* Remove item from the list when clicked ion checkbox */
+	function removeFromCheck($item, $list, wishlist) 
+	{
+        $item.draggable('option', 'revert', false);
+	    $("#" + cl(wishlist) + $item.attr("id"), $list).fadeOut().remove();
+	}
+ 
+    </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="right">
+    
+			<div id="wishlist" class="dropzone"> 
+				<h4>Wish List</h4>
+				<div class="container">
+				</div>
+				<span class="bottom">Drag your items here.</span>
+			</div>     
+			
+			<div id="shoppinglist" class="dropzone"> 
+				<h4>Shopping List</h4>
+				<div class="container">
+				</div>
+				<span class="bottom">Drag your items here.</span>
+			</div>    	
+	</div>
+    <div id="left">
+        <div id="main">
+            <div id="header">
+                <div id="subhd">
+                    <a href="index.htm" class="logo"><img src="img/lgo_abundant.png" height="75" width="276" alt="Abundant Closet - Work your wardrobe" /></a>
+                    <div id="credentials">
+                        <div class="bigtext">WELCOME RUNNER 37</div>
+                        <a href="#">MY PROFILE</a> - <a href="#">SIGN OUT?</a>
+                    </div>
+                </div>
+                
+                <div id="menu">
+                    <ul>
+                        <li><a href="#">Expand your Closet</a></li>
+                        <li class="current"><a href="mycloset.htm">My Closet</a></li>
+                        <li><a href="public_closet.htm">Public Closet</a></li>
+                        <li><a href="blog.htm">Organizing/Styling</a></li>
+                    </ul>
+                </div>            
+            </div>
+            <div id="content" class="cont-twocol">
+            
+            <div class="leftbar">
+                <div class="title">
+                    MY CLOSET
+                </div>
+                
+                <ul>
+                <li><a href="#" class="current">MY GARMENTS</a></li>
+                <li><a href="#">MY OUTFITS</a></li>
+                <li><a href="#">MY OUTFIT BLOG</a></li>
+                <li><a href="#">MY WISH LIST</a></li>
+                <li><a href="#">MY SHOPPING LIST</a></li>
+                </ul>
+                
+                <div class="title">
+                    OTHER COLLECTIONS
+                </div>                
+
+                <ul class="collections">
+                <li><a href="#" class="romantic">ROMANTIC</a></li>
+                <li><a href="#" class="preppy">PREPPY</a></li>
+                <li class="current"><a href="#" class="sporty">SPORTY</a></li>
+                <li><a href="#" class="classic">CLASSIC</a></li>
+                <li><a href="#" class="glamorous">GLAMOROUS</a></li>
+                <li><a href="#" class="bohemian">BOHEMIAN</a></li>
+                <li><a href="#" class="trendy">TRENDY</a></li>
+                <li><a href="#" class="comfortable">COMFORTABLE</a></li>
+                </ul>
+                
+                <div class="blognote">
+                    <div class="container">
+                        <h1>Spring/Summer 09 Trend Report</h1>
+                        <img src="img/img_blognote.gif" width="122" height="82" alt="Color of the Moment" border="0" />
+                        <p>Resident Co-Style Director Davee Troublefield shares his take on what’s ahead for spring and summer.</p>
+                        <p style="text-align:right;"><a href="blog.htm">Read more</a></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="rightbar" class="build-closet-step-1">
+                
+                <div class="box-heading">
+                    <h1><div class="sponsored">Sponsored By <a href="http://www.jcpenney.com" target="_blank">JCPenney</a></div>Sporty Garment Collection - Add to My Closet</h1>
+                    <h2 class="add">To add a garment to your Closet, check the "add" box at the image.</h2>
+                    <h2 class="add last">Remember You can also drag/check any garment to your wish list or Shopping List to your right.</h2>
+                </div>
+                
+<div id="tabs">
+                    <div class="tab-menu">
+	                <ul>
+		                <li><a name="#tabs-1" class="current">1. Pants/Jeans</a></li>
+		                <li><a name="#tabs-2">2. Skirts/Shorts</a></li>
+		                <li><a name="#tabs-3">3. Dresses</a></li>
+		                <li><a name="#tabs-0">4. Shirts/Tops</a></li>
+		                <li><a name="#tabs-0">5. Coats/Jacketss</a></li>
+		                <li><a name="#tabs-0">6. Accessories</a></li>
+	                </ul>
+	                </div>
+
+	                <div id="tabs-1" class="tab-container build-1col" style="border:5px solid #466190;background: #AAB8D3; overflow: hidden; display:block; width: 100%;">
+
+	                                <div id="prodp1" class="item">
+	                                <h1 class="drag">beige sweat pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/beige sweat pants.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prodp2" class="item">
+	                                <h1 class="drag">black cargo pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	                                
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/black cargo pants.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prodp3" class="item">
+	                                <h1 class="drag">black yoga pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/black yoga pants.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prodp4" class="item">
+	                                <h1 class="drag">brown cargo pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/brown cargo pants.jpg" class="drag" /></div>
+	                                </div>
+	                               
+	                                <div id="prodp5" class="item">
+	                                <h1 class="drag">gray yoga pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/gray yoga pants.jpg" class="drag" /></div>
+	                                </div>	         
+
+	                                <div id="Div1" class="item">
+	                                <h1 class="drag">grey sweat pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/grey sweat pants.jpg" class="drag" /></div>
+	                                </div>	
+
+	                                <div id="Div2" class="item">
+	                                <h1 class="drag">khaki boyfriend pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/khaki boyfriend pants.jpg" class="drag" /></div>
+	                                </div>	
+	                                
+	                                <div id="Div3" class="item">
+	                                <h1 class="drag">khaki chinos</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/khaki chinos.jpg" class="drag" /></div>
+	                                </div>	
+
+	                                <div id="Div4" class="item">
+	                                <h1 class="drag">navy sweat pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/navy sweat pants.jpg" class="drag" /></div>
+	                                </div>	
+
+	                                <div id="Div5" class="item">
+	                                <h1 class="drag">white cargo pants</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-pants/white cargo pants.jpg" class="drag" /></div>
+	                                </div>		                                	                                	                                	                                
+	                                                    
+                    </div>
+
+	                <div id="tabs-2" class="tab-container build-1col" style="border:5px solid #466190;background: #AAB8D3; overflow: hidden; width: 100%;">
+	               	                                <div id="Div6" class="item">
+	                                <h1 class="drag">Brown Cargo Skirt</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-skirts/brown cargo skirt.jpg" class="drag" /></div>
+
+	                                </div>
+	                                
+	                                <div id="Div7" class="item">
+	                                <h1 class="drag">White Jersey Skirt</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>	                                <div class="picture"><img src="res/sporty-skirts/white jersey skirt.jpg" class="drag" /></div>
+
+	                                </div>
+                    </div>
+                    
+   	                <div id="tabs-3" class="tab-container build-1col" style="border:5px solid #466190;background: #AAB8D3; overflow: hidden; width: 100%;">
+	                                <div id="prodd1" class="item">
+	                                <h1 class="drag">black racer back dress</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-dresses/black racer back dress.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prodd2" class="item">
+	                                <h1 class="drag">Navy Polo Dress</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	                                
+	                                </div>
+	                                <div class="picture"><img src="res/sporty-dresses/Navy Polo Dress.jpg" class="drag" /></div>
+	                                </div>
+                    </div>
+                    
+	                <div id="tabs-0" class="tab-container build-1col" style="border:5px solid #466190;background: #AAB8D3; overflow: hidden; width: 100%;">
+	                
+	                                <div id="prod1" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prod2" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	                                
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prod3" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+	                                </div>
+	                                
+	                                <div id="prod4" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+	                                </div>
+	                               
+	                                <div id="prod5" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+	                                </div>	   
+	                                
+	                                <div id="prod6" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>
+	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+
+	                                </div>
+	                                
+	                                <div id="prod7" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+
+	                                </div>
+
+	                                <div id="prod8" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+
+	                                </div>
+	                                
+	                                <div id="prod9" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+
+	                                </div>
+	                                
+	                                <div id="prod10" class="item">
+	                                <h1 class="drag">Gray linen pant</h1>
+	                                <div style="float:right;">
+	                                <dl>
+	                                    <dd>add</dd>
+	                                    <dt><input type="checkbox" name="item1" checked="checked" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>list</dd>
+	                                    <dt><input type="checkbox" class="list"  name="item2" /></dt>
+	                                </dl>
+	                                <dl>
+	                                    <dd>buy</dd>
+	                                    <dt><input type="checkbox" class="buy"  name="item2" /></dt>
+	                                </dl>	
+	                                </div>	                                <div class="picture"><img src="img/list_item.jpg" class="drag" /></div>
+
+	                                </div>		                                
+	                                	                
+	                </div>
+                </div>
+                <div class="pagination">
+                    <ul>
+                    <li class="prev">prev</li>
+                    <li class="first selected">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li>5</li>
+                    <li class="next">next</li>
+                    </ul>
+                </div> 
+
+                <div id="taberror" class="alerterror">Remember to review each garment type before You finish to add garments.</div>
+           
+                <center style="margin:13px;">
+                    <a class="button" id="btnBuildCloset">Add garments to My Closet</a>
+                </center>
+                
+            </div>
+            
+            </div>
+            <div id="footer">
+                <div class="links">
+                <ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Terms of Use</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <li><a href="">Sitemap</a></li>
+                </ul>
+                </div>
+                <span class="copyright">COPYRIGHT © 2009 ABUNDANT CLOSET LLC - ALL RIGHTS RESERVED</span>            
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

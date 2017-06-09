@@ -1,0 +1,429 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CBD7D68C-5466-42C2-BD1F-37C084BC69E5}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>AJAXEnabledWebApplication1</RootNamespace>
+    <AssemblyName>AJAXEnabledWebApplication1</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+    <Reference Include="System.Web.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="blog.htm" />
+    <Content Include="build1-1column.htm" />
+    <Content Include="build1-3column.htm" />
+    <Content Include="build1.htm" />
+    <Content Include="build2.htm" />
+    <Content Include="build3.htm" />
+    <Content Include="build4-1.htm" />
+    <Content Include="build4.htm" />
+    <Content Include="css\grids-min.css" />
+    <Content Include="css\main.css" />
+    <Content Include="css\redmond\images\ico_slider.gif" />
+    <Content Include="css\redmond\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="css\redmond\images\ui-bg_flat_55_fbec88_40x100.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_75_d0e5f5_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_85_dfeffc_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="css\redmond\images\ui-bg_gloss-wave_55_5c9ccc_500x100.png" />
+    <Content Include="css\redmond\images\ui-bg_inset-hard_100_f5f8f9_1x100.png" />
+    <Content Include="css\redmond\images\ui-bg_inset-hard_100_fcfdfd_1x100.png" />
+    <Content Include="css\redmond\images\ui-icons_217bc0_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_469bdd_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_6da8d5_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_d8e7f3_256x240.png" />
+    <Content Include="css\redmond\images\ui-icons_f9bd01_256x240.png" />
+    <Content Include="css\redmond\jquery-ui-1.7.1.custom.css" />
+    <Content Include="forgot.htm" />
+    <Content Include="img\arrow_green.gif" />
+    <Content Include="img\arrow_pager_l.gif" />
+    <Content Include="img\arrow_pager_r.gif" />
+    <Content Include="img\ban160x600.gif" />
+    <Content Include="img\ban180x150.gif" />
+    <Content Include="img\bg_cont_right.png" />
+    <Content Include="img\bg_footer_top.png" />
+    <Content Include="img\bg_item.gif" />
+    <Content Include="img\bg_menu.png" />
+    <Content Include="img\bg_popup_bot.gif" />
+    <Content Include="img\bg_popup_brd.gif" />
+    <Content Include="img\bg_popup_mid.gif" />
+    <Content Include="img\bg_popup_top.gif" />
+    <Content Include="img\box_bottom.gif" />
+    <Content Include="img\box_top.gif" />
+    <Content Include="img\brands_dg.gif" />
+    <Content Include="img\brand_lizclalborne.gif" />
+    <Content Include="img\btn-browse.gif" />
+    <Content Include="img\btn-choose-file.gif" />
+    <Content Include="img\btn_bot.gif" />
+    <Content Include="img\btn_top.gif" />
+    <Content Include="img\closeWhite.gif" />
+    <Content Include="img\fdo_pattern.gif" />
+    <Content Include="img\ico_calendar.gif" />
+    <Content Include="img\ico_col_bohemian.gif" />
+    <Content Include="img\ico_col_bohemian_sel.gif" />
+    <Content Include="img\ico_col_classic.gif" />
+    <Content Include="img\ico_col_classic_sel.gif" />
+    <Content Include="img\ico_col_comfortable.gif" />
+    <Content Include="img\ico_col_comfortable_sel.gif" />
+    <Content Include="img\ico_col_glamarous.gif" />
+    <Content Include="img\ico_col_glamorous.gif" />
+    <Content Include="img\ico_col_glamorous_sel.gif" />
+    <Content Include="img\ico_col_preppy.gif" />
+    <Content Include="img\ico_col_preppy_sel.gif" />
+    <Content Include="img\ico_col_romantic.gif" />
+    <Content Include="img\ico_col_romantic_sel.gif" />
+    <Content Include="img\ico_col_sporty.gif" />
+    <Content Include="img\ico_col_sporty_sel.gif" />
+    <Content Include="img\ico_col_trendy.gif" />
+    <Content Include="img\ico_col_trendy_sel.gif" />
+    <Content Include="img\ico_drag.gif" />
+    <Content Include="img\ico_minus.gif" />
+    <Content Include="img\ico_mobile.gif" />
+    <Content Include="img\ico_pc.gif" />
+    <Content Include="img\ico_plus.gif" />
+    <Content Include="img\ico_slider.gif" />
+    <Content Include="img\ico_star.gif" />
+    <Content Include="img\ico_star_blue.gif" />
+    <Content Include="img\ico_star_gray.gif" />
+    <Content Include="img\ico_star_orange.gif" />
+    <Content Include="img\ico_step_1.gif" />
+    <Content Include="img\ico_step_2.gif" />
+    <Content Include="img\ico_step_3.gif" />
+    <Content Include="img\img_blog.gif" />
+    <Content Include="img\img_blog.jpg" />
+    <Content Include="img\img_blog1.jpg" />
+    <Content Include="img\img_blog2.jpg" />
+    <Content Include="img\img_blog3.jpg" />
+    <Content Include="img\img_blog4.jpg" />
+    <Content Include="img\img_blog5.jpg" />
+    <Content Include="img\img_blognote.gif" />
+    <Content Include="img\img_bohemian.gif" />
+    <Content Include="img\img_classic.gif" />
+    <Content Include="img\img_classic_over.gif" />
+    <Content Include="img\img_classic_over.jpg" />
+    <Content Include="img\img_comfortable.gif" />
+    <Content Include="img\img_davee.jpg" />
+    <Content Include="img\img_glamorous.gif" />
+    <Content Include="img\img_michelle.jpg" />
+    <Content Include="img\img_ofu_1.gif" />
+    <Content Include="img\img_ofu_2.gif" />
+    <Content Include="img\img_ofu_3.gif" />
+    <Content Include="img\img_ofu_4.jpg" />
+    <Content Include="img\img_of_1.gif" />
+    <Content Include="img\img_of_2.gif" />
+    <Content Include="img\img_of_3.gif" />
+    <Content Include="img\img_preppy.gif" />
+    <Content Include="img\img_romantic.gif" />
+    <Content Include="img\img_sporty.gif" />
+    <Content Include="img\img_sporty_over.jpg" />
+    <Content Include="img\img_trendy.gif" />
+    <Content Include="img\img_trendy_over.jpg" />
+    <Content Include="img\img_upload.jpg" />
+    <Content Include="img\lb_arrow.gif" />
+    <Content Include="img\lb_arrow_sel.gif" />
+    <Content Include="img\lb_classic.jpg" />
+    <Content Include="img\lb_sporty.gif" />
+    <Content Include="img\lb_stylenote.jpg" />
+    <Content Include="img\lb_trendy.jpg" />
+    <Content Include="img\lgo_abundant.png" />
+    <Content Include="img\list_item.jpg" />
+    <Content Include="img\logos\athleta.gif" />
+    <Content Include="img\logos\babypath.png" />
+    <Content Include="img\logos\bcbg.jpg" />
+    <Content Include="img\logos\bebe.gif" />
+    <Content Include="img\logos\calvin_klein.gif" />
+    <Content Include="img\logos\century21.jpg" />
+    <Content Include="img\logos\forever21.jpg" />
+    <Content Include="img\logos\H&amp;M.jpg" />
+    <Content Include="img\logos\nike.jpg" />
+    <Content Include="img\logos\ralph-lauren.jpg" />
+    <Content Include="img\logos\zara.jpg" />
+    <Content Include="img\partner\belk.jpg" />
+    <Content Include="img\partner\belk2.jpg" />
+    <Content Include="img\pic_home.gif" />
+    <Content Include="img\sep_gray.gif" />
+    <Content Include="img\sep_pager.gif" />
+    <Content Include="img\store_anntaylor.gif" />
+    <Content Include="img\tab_visited_tick.gif" />
+    <Content Include="index.htm" />
+    <Content Include="js\build1.js" />
+    <Content Include="js\common.js" />
+    <Content Include="js\jquery-1.3.2.dev.fixedoffset.js" />
+    <Content Include="js\jquery-1.3.2.min.js" />
+    <Content Include="js\jquery-ui-1.7.1.custom.min.js" />
+    <Content Include="js\jquery.blockUI.js" />
+    <Content Include="js\jquery.bt.min.js" />
+    <Content Include="js\jquery.filestyle.js" />
+    <Content Include="js\jquery.hoverIntent.minified.js" />
+    <Content Include="js\jquery.validate.js" />
+    <Content Include="js\outfit.js" />
+    <Content Include="mycloset.htm" />
+    <Content Include="mycloset_outfit.htm" />
+    <Content Include="mycloset_outfitblog.htm" />
+    <Content Include="mycloset_sporty.htm" />
+    <Content Include="public_closet.htm" />
+    <Content Include="public_full.htm" />
+    <Content Include="res\Classic-Accessories\black esspadrille.jpg" />
+    <Content Include="res\Classic-Accessories\black flat sandal.jpg" />
+    <Content Include="res\Classic-Accessories\black knee high boot.jpg" />
+    <Content Include="res\Classic-Accessories\black pump.jpg" />
+    <Content Include="res\Classic-Accessories\black wide belt.jpg" />
+    <Content Include="res\Classic-Accessories\silver drop earring.jpg" />
+    <Content Include="res\Classic-Accessories\silver pendant.jpg" />
+    <Content Include="res\classic-dresses\black boat neck.jpg" />
+    <Content Include="res\classic-dresses\black sheath.jpg" />
+    <Content Include="res\classic-dresses\gray silk dress.jpg" />
+    <Content Include="res\classic-dresses\khaki sleevless.jpg" />
+    <Content Include="res\classic-dresses\navy polo dress.jpg" />
+    <Content Include="res\classic-dresses\orange shirt dress.jpg" />
+    <Content Include="res\classic-dresses\print wrap dress.jpg" />
+    <Content Include="res\classic-dresses\red sheath.jpg" />
+    <Content Include="res\classic-dresses\white linen dress.jpg" />
+    <Content Include="res\classic-jackets\black blazer.jpg" />
+    <Content Include="res\classic-jackets\black cardigan.jpg" />
+    <Content Include="res\classic-jackets\yellow cardigan.jpg" />
+    <Content Include="res\classic-pants\Beige Narrow Pants.jpg" />
+    <Content Include="res\classic-pants\Beige Pants.jpg" />
+    <Content Include="res\classic-pants\Black Velvet Pant.jpg" />
+    <Content Include="res\classic-pants\Gray Wide Leg Pants.jpg" />
+    <Content Include="res\classic-pants\grey pants.jpg" />
+    <Content Include="res\classic-pants\Navy Wool Trousers.jpg" />
+    <Content Include="res\classic-pants\white pants.jpg" />
+    <Content Include="res\classic-skirts\Beige Pleated Skirt.jpg" />
+    <Content Include="res\classic-skirts\Beige Tweed Skirt.jpg" />
+    <Content Include="res\classic-skirts\Black Pencil Skirt.jpg" />
+    <Content Include="res\classic-skirts\Black Pleated Skirt.jpg" />
+    <Content Include="res\classic-skirts\Brown Pencil Skirt.jpg" />
+    <Content Include="res\classic-skirts\Brown Tweed Skirt.jpg" />
+    <Content Include="res\classic-skirts\Denim Pleated Skirt.jpg" />
+    <Content Include="res\classic-skirts\Long Gray Tweed Skirt.jpg" />
+    <Content Include="res\classic-skirts\Navy Pencil Skirt.jpg" />
+    <Content Include="res\classic-skirts\White Pleated Skirt.jpg" />
+    <Content Include="res\classic-tops\black turleneck.jpg" />
+    <Content Include="res\classic-tops\white button down.jpg" />
+    <Content Include="res\classic-tops\white tee.jpg" />
+    <Content Include="res\outfit\0CR018.Date\khaki safari dress.jpg" />
+    <Content Include="res\outfit\0CR018.Date\silver gladiator.jpg" />
+    <Content Include="res\outfit\0CR018.Date\silver.gold bangles.jpg" />
+    <Content Include="res\outfit\OCR010.Work.black pants\black bootie.jpg" />
+    <Content Include="res\outfit\OCR010.Work.black pants\black turleneck.jpg" />
+    <Content Include="res\outfit\OCR010.Work.black pants\black Wide Leg Pants.jpg" />
+    <Content Include="res\outfit\OCR010.Work.black pants\silver pendant.jpg" />
+    <Content Include="res\outfit\OCR011.Work. black pants\black wide belt.jpg" />
+    <Content Include="res\outfit\OCR011.Work. black pants\black Wide Leg Pants.jpg" />
+    <Content Include="res\outfit\OCR011.Work. black pants\red patent peep toe heels.jpg" />
+    <Content Include="res\outfit\OCR011.Work. black pants\white button down.jpg" />
+    <Content Include="res\outfit\OCR011.Work. black pants\yellow cardigan.jpg" />
+    <Content Include="res\outfit\OCR012.Work. black pants\black cardigan.jpg" />
+    <Content Include="res\outfit\OCR012.Work. black pants\black knee high boot.jpg" />
+    <Content Include="res\outfit\OCR012.Work. black pants\black Wide Leg Pants.jpg" />
+    <Content Include="res\outfit\OCR012.Work. black pants\green scarf.jpg" />
+    <Content Include="res\outfit\OCR012.Work. black pants\white tee.jpg" />
+    <Content Include="res\outfit\OCR013.Work. Updater\belk Pendant.jpg" />
+    <Content Include="res\outfit\OCR013.Work. Updater\black bootie.jpg" />
+    <Content Include="res\outfit\OCR013.Work. Updater\black wide belt.jpg" />
+    <Content Include="res\outfit\OCR013.Work. Updater\khaki sleevless.jpg" />
+    <Content Include="res\outfit\OCR013.Work. Updater\Link for Kristen Davis Pendant.xml" />
+    <Content Include="res\outfit\OCR014.Date.Updater\belk yellow tee.jpg" />
+    <Content Include="res\outfit\OCR014.Date.Updater\black bag.jpg" />
+    <Content Include="res\outfit\OCR014.Date.Updater\black pump.jpg" />
+    <Content Include="res\outfit\OCR014.Date.Updater\grey pants.jpg" />
+    <Content Include="res\outfit\OCR014.Date.Updater\Link for Yellow Tee.xml" />
+    <Content Include="res\outfit\OCR014.Date.Updater\silver drop earring.jpg" />
+    <Content Include="res\outfit\OCR015.Work\Beige Pleated Skirt.jpg" />
+    <Content Include="res\outfit\OCR015.Work\black esspadrille.jpg" />
+    <Content Include="res\outfit\OCR015.Work\black wide belt.jpg" />
+    <Content Include="res\outfit\OCR015.Work\multi chain necklace.jpg" />
+    <Content Include="res\outfit\OCR015.Work\white button down.jpg" />
+    <Content Include="res\outfit\OCR016.Date\silver gladiator.jpg" />
+    <Content Include="res\outfit\OCR016.Date\untitled.jpg" />
+    <Content Include="res\outfit\OCR016.Date\white pants.jpg" />
+    <Content Include="res\outfit\OCR016.Date\Yellow BabyDoll Top.jpg" />
+    <Content Include="res\outfit\OCR017.Work\black bootie.jpg" />
+    <Content Include="res\outfit\OCR017.Work\Black Pencil Skirt.jpg" />
+    <Content Include="res\outfit\OCR017.Work\gray tee.jpg" />
+    <Content Include="res\outfit\OCR017.Work\multi chain necklace.jpg" />
+    <Content Include="res\outfit\OCR017.Work\white button down.jpg" />
+    <Content Include="res\outfit\OCR019.Play\Beige Pants.jpg" />
+    <Content Include="res\outfit\OCR019.Play\black cardigan.jpg" />
+    <Content Include="res\outfit\OCR019.Play\black flat sandal.jpg" />
+    <Content Include="res\outfit\OCR019.Play\green scarf.jpg" />
+    <Content Include="res\outfit\OCR019.Play\white tee.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR020.Beena101.Signature\bangles.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR020.Beena101.Signature\blacklegging.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR020.Beena101.Signature\blue chanelier earring.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR020.Beena101.Signature\blue print top.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR020.Beena101.Signature\gold gladiator.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR021\beige top.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR021\blue scarf.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR021\distressed flare jean.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR021\gold gladiator.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR022\blue chanelier earring.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR022\floral maxi.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR022\gold gladiator.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR023\gold gladiator.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR023\purple slip dress.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR024\brown frye boots.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR024\brown scarf.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR024\distressed flare jean.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR024\white embroidered top.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR025\bangles.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR025\brown frye boots.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR025\distressed flare jean.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR025\print top.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR026\bangles.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR026\brown frye boots.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR026\brown tank.jpg" />
+    <Content Include="res\public-closets\Beena101.Bohemian\OCR026\ethnic skirt.jpg" />
+    <Content Include="res\public-closets\CareerGirl20.Classic\beige cardigan.jpg" />
+    <Content Include="res\public-closets\CareerGirl20.Classic\black pump.jpg" />
+    <Content Include="res\public-closets\CareerGirl20.Classic\gold hoop earring.jpg" />
+    <Content Include="res\public-closets\CareerGirl20.Classic\Navy Wool Trousers.jpg" />
+    <Content Include="res\public-closets\CareerGirl20.Classic\white button down.jpg" />
+    <Content Include="res\public-closets\Chrisport.Sporty\blue flip flop.jpg" />
+    <Content Include="res\public-closets\Chrisport.Sporty\circle pendant.jpg" />
+    <Content Include="res\public-closets\Chrisport.Sporty\navy polo dress.jpg" />
+    <Content Include="res\public-closets\Fashionista101\black bootie.jpg" />
+    <Content Include="res\public-closets\Fashionista101\blue full mini.jpg" />
+    <Content Include="res\public-closets\Fashionista101\grey blousy tee.jpg" />
+    <Content Include="res\public-closets\Fashionista101\yellow scarf.jpg" />
+    <Content Include="res\public-closets\Lilhopper.Sporty\brown uggs.jpg" />
+    <Content Include="res\public-closets\Lilhopper.Sporty\gray tee.jpg" />
+    <Content Include="res\public-closets\Lilhopper.Sporty\Hoodie.jpg" />
+    <Content Include="res\public-closets\Lilhopper.Sporty\navy sweat pants.jpg" />
+    <Content Include="res\public-closets\Ritachill.Comfortable\aqua top.jpg" />
+    <Content Include="res\public-closets\Ritachill.Comfortable\black yoga pants.jpg" />
+    <Content Include="res\public-closets\Ritachill.Comfortable\blue flip flop.jpg" />
+    <Content Include="res\public-closets\Rorobo.Romantic\Blue Ruffle Dress.jpg" />
+    <Content Include="res\public-closets\Rorobo.Romantic\Pearl.blue necklace.jpg" />
+    <Content Include="res\public-closets\Rorobo.Romantic\silver sandal.jpg" />
+    <Content Include="res\sporty-dresses\black racer back dress.jpg" />
+    <Content Include="res\sporty-dresses\navy polo dress.jpg" />
+    <Content Include="res\sporty-pants\beige sweat pants.jpg" />
+    <Content Include="res\sporty-pants\black cargo pants.jpg" />
+    <Content Include="res\sporty-pants\black yoga pants.jpg" />
+    <Content Include="res\sporty-pants\brown cargo pants.jpg" />
+    <Content Include="res\sporty-pants\gray yoga pants.jpg" />
+    <Content Include="res\sporty-pants\grey sweat pants.jpg" />
+    <Content Include="res\sporty-pants\khaki boyfriend pants.jpg" />
+    <Content Include="res\sporty-pants\khaki chinos.jpg" />
+    <Content Include="res\sporty-pants\navy sweat pants.jpg" />
+    <Content Include="res\sporty-pants\white cargo pants.jpg" />
+    <Content Include="res\sporty-skirts\brown cargo skirt.jpg" />
+    <Content Include="res\sporty-skirts\white jersey skirt.jpg" />
+    <Content Include="res\Trendy-Accessories\aqua statement necklace.jpg" />
+    <Content Include="res\Trendy-Accessories\black bootie.jpg" />
+    <Content Include="res\Trendy-Accessories\green scarf.jpg" />
+    <Content Include="res\Trendy-Accessories\multi chain necklace.jpg" />
+    <Content Include="res\Trendy-Accessories\red patent peep toe heels.jpg" />
+    <Content Include="res\Trendy-Accessories\silver gladiator.jpg" />
+    <Content Include="res\Trendy-Accessories\silver.gold bangles.jpg" />
+    <Content Include="res\trendy-dresses\black v dress.jpg" />
+    <Content Include="res\trendy-dresses\floral empire dress.jpg" />
+    <Content Include="res\trendy-dresses\grey empire.jpg" />
+    <Content Include="res\trendy-dresses\grey goddess dress.jpg" />
+    <Content Include="res\trendy-dresses\khaki safari dress.jpg" />
+    <Content Include="res\trendy-dresses\white bandage dress.jpg" />
+    <Content Include="res\trendy-dresses\yellow lace dress.jpg" />
+    <Content Include="res\trendy-jackets\black leather jacket.jpg" />
+    <Content Include="res\trendy-jackets\black wide shoulder jacket.jpg" />
+    <Content Include="res\trendy-jackets\leopard coat.jpg" />
+    <Content Include="res\trendy-jackets\white tuxedo jacket.jpg" />
+    <Content Include="res\trendy-pants\Beige Boyfriend Pant.jpg" />
+    <Content Include="res\trendy-pants\Beige Wide Leg Pants.jpg" />
+    <Content Include="res\trendy-pants\Black Harem Pant.jpg" />
+    <Content Include="res\trendy-pants\Black skinny Pant.jpg" />
+    <Content Include="res\trendy-pants\black Wide Leg Pants.jpg" />
+    <Content Include="res\trendy-pants\Brown Wide Leg Pant.jpg" />
+    <Content Include="res\trendy-pants\Gray High Waist Pants.jpg" />
+    <Content Include="res\trendy-pants\White Sailor Pant.jpg" />
+    <Content Include="res\trendy-pants\Yellow Skinny Pants.jpg" />
+    <Content Include="res\trendy-skirts\beige Trumpet skirt.jpg" />
+    <Content Include="res\trendy-skirts\Black Pencil Skirt.jpg" />
+    <Content Include="res\trendy-skirts\green full ikat skirt.jpg" />
+    <Content Include="res\trendy-skirts\high waist black pencil skirt.jpg" />
+    <Content Include="res\trendy-skirts\navy full mini skirt.jpg" />
+    <Content Include="res\trendy-skirts\test.jpg" />
+    <Content Include="res\trendy-skirts\test2.jpg" />
+    <Content Include="res\trendy-tops\acid yellow top.jpg" />
+    <Content Include="res\trendy-tops\gray bubble top.jpg" />
+    <Content Include="res\trendy-tops\union jack tee.jpg" />
+    <Content Include="signin.htm" />
+    <Content Include="Web.config" />
+    <Content Include="wishlist.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\classic-dresses\Thumbs.db" />
+    <None Include="res\outfit\0CR018.Date\Thumbs.db" />
+    <None Include="res\outfit\OCR010.Work.black pants\Thumbs.db" />
+    <None Include="res\outfit\OCR011.Work. black pants\Thumbs.db" />
+    <None Include="res\outfit\OCR014.Date.Updater\Thumbs.db" />
+    <None Include="res\outfit\OCR015.Work\Thumbs.db" />
+    <None Include="res\outfit\OCR016.Date\Thumbs.db" />
+    <None Include="res\public-closets\Chrisport.Sporty\Thumbs.db" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="res\outfit\OCR014\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49573</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

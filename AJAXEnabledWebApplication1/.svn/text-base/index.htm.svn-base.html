@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+   <title>Abundant Closet - Work Your Wardrobe</title>
+   <link rel="stylesheet" type="text/css" href="css/grids-min.css" />    
+   <link rel="stylesheet" href="css/main.css" type="text/css" />
+   <link type="text/css" href="css/redmond/jquery-ui-1.7.1.custom.css" rel="stylesheet" />	
+   
+   <script language="javascript" src="js/jquery-1.3.2.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery-ui-1.7.1.custom.min.js" type="text/javascript"></script>
+   <script language="javascript" src="js/jquery.hoverIntent.minified.js" type="text/javascript"></script>
+   <script language="javascript" src="js/common.js" type="text/javascript"></script>
+
+   <script language="javascript" type="text/javascript">
+    var popupOpened = false;
+    
+    function showOver()
+    {
+        if (popupOpened)
+            return;
+            
+        var collection = $( "dd", $(this)).text().toLowerCase();
+        $("#" + collection + "Popup").dialog('option', 'position', [$(this).offset().left - 100, $(this).offset().top - 370]);
+        $("#" + collection + "Popup").dialog('open');
+    }
+    
+    function hideOver()
+    {
+    }
+    
+    $(document).ready(function() {
+        // Open popup when clicked
+        $("#btnMixMyStyles").css("cursor","pointer").click(openMixStylesPopup);
+       
+        $(".collection dl").click(showOver).css("cursor","pointer");
+        
+        $(".popup").dialog({ autoOpen: false, resizable: false, width:350, modal:true });
+
+        $('.popup').bind('dialogopen', function(event, ui) {
+            popupOpened = true;
+        });
+                
+        $('.popup').bind('dialogclose', function(event, ui) {
+            popupOpened = false;
+        });
+         
+        // Close the popup when mouseout on it (except for Mix Styles popup)
+        $(".ui-dialog[aria-labelledby!='ui-dialog-title-mix_styles']").mouseleave(function() { $(".popup").dialog("close"); });
+        
+        $(".collection dl").hoverIntent({
+		    interval: 300, // milliseconds delay before onMouseOver
+		    over: showOver, 
+		    timeout: 300, // milliseconds delay before onMouseOut
+	    	out: hideOver
+    	});
+    });
+    
+    // Shows the current % near the slider.
+    function onSlide(event, ui)
+    {
+        $(ui.handle).parent().eq(0).prev("em").text(ui.value + '%');
+    }
+    
+    function openMixStylesPopup() {
+    
+        // Validate classic and trendy are checked
+        $("#collectionerror").hide();
+        var addClassic = false;
+        var addTrendy = false;
+        var addSporty = false;
+        
+        var i = $(":checked").length;
+        if (i == 1 && $("#classiccheck").is(':checked')) 
+        {
+            window.location = "build1-1column.htm";
+            return;
+        }
+        else if (i == 2 && $("#trendycheck").is(':checked') && $("#classiccheck").is(':checked'))
+        { 
+            $("#sliders").empty();
+            $("#sliders").append($("<li>CLASSIC CHIC</li>"));
+	        $("#sliders").append($("<li><em>50%</em><span>50</span></li>"));
+	        $("#sliders").append($("<li>TRENDY</li>"));
+	        $("#sliders").append($("<li><em>50%</em><span>50</span></li>"));
+        }
+        else if (i == 3 && $("#trendycheck").is(':checked') && $("#classiccheck").is(':checked') && $("#sportycheck").is(':checked'))
+        { 
+            $("#sliders").empty();
+            $("#sliders").append($("<li>CLASSIC CHIC</li>"));
+	        $("#sliders").append($("<li><em>25%</em><span>25</span></li>"));
+	        $("#sliders").append($("<li>TRENDY</li>"));
+	        $("#sliders").append($("<li><em>25%</em><span>25</span></li>"));
+	        $("#sliders").append($("<li>SPORTY</li>"));
+	        $("#sliders").append($("<li><em>50%</em><span>50</span></li>"));
+        }
+        else
+        {
+             $("#collectionerror").show('highlight',{},4000).hide('highlight',{},2000);
+             return;
+        }
+
+		// Set the sliders
+		$("#sliders span").each(function() {
+			// read initial values from markup and remove that
+			var value = parseInt($(this).text());
+			$(this).empty();
+			$(this).slider({
+				value: value,
+				min: 0, 
+			    max: 100,
+			    step: 25,
+			    orientation: "horizontal",
+			    animate: true,
+    			slide: onSlide
+			})
+		});
+		
+		// On click on Build My Closet, go to step 1
+		$("#btnBuildMyCloset").click(buildMyCloset);
+		
+		$('div#mix_styles').dialog('open');
+    }
+    
+    function buildMyCloset()
+    {
+        // Validate the sum is 100%, otherwise show error.
+        $("#mixederror").hide();
+        var total = 0;
+        $("#sliders span").each(function() {
+           total += parseInt($(this).slider("value"));
+        });
+        
+        if (total != 100)
+        {
+            $("#mixederror").show('highlight',{},4000).hide('highlight',{},2000);
+        }
+        else 
+        {
+            if ($("#sliders span").length == 3)
+                window.location = "build1-3column.htm";
+            else
+                window.location = "build1.htm";
+        }
+            
+    }
+		 
+   </script>
+</head>
+<body>
+
+<div id="container">
+    <div id="right">
+        <img src="img/ban180x150.gif" class="bantop" width="180" height="150" alt="Banner 180x150" />
+        <img src="img/ban160x600.gif" class="banlarge" width="160" height="600" alt="Banner 180x150" />
+    </div>
+    <div id="left">
+        <div id="main">
+            <div id="header">
+                <div id="subhd">
+                    <a href="index.htm" class="logo"><img src="img/lgo_abundant.png" height="75" width="276" alt="Abundant Closet - Work your wardrobe" /></a>
+                    <div id="credentials">
+                        <div class="bigtext">WELCOME</div>
+                        WOULD YOU LIKE TO <a href="signin.htm">SIGN IN?</a>
+                    </div>
+                </div>
+                
+                <div id="menu">
+                    <ul>
+                        <li><a href="#">Build your Closet</a></li>
+                        <li><a href="mycloset.htm">My Closet</a></li>
+                        <li><a href="public_closet.htm">Public Closet</a></li>
+                        <li><a href="blog.htm">Organizing/Styling</a></li>
+                    </ul>
+                </div>            
+            </div>
+            <div id="content" class="home">
+            
+            <div style="margin: 0 auto;"><img src="img/pic_home.gif"  id="pic_home" width="732" height="329" alt="Welcome" /></div>
+            <br />
+            
+            <table id="styles">
+            <tr>
+            <td>
+                <dl id="romantic">
+                    <dt><img src="img/img_romantic.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>ROMANTIC</dd>
+                </dl>
+                <div style="text-align:center"><input type="checkbox" class="check" /></div>
+            </td>
+            <td>
+                <dl id="preppy">
+                    <dt><img src="img/img_preppy.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>PREPPY</dd>
+                </dl>
+                <div style="text-align:center"><input type="checkbox" class="check" /></div>
+            </td>
+            <td>
+                <div class="collection">
+                <dl id="sporty">
+                    <dt>
+                    <img src="img/img_sporty.gif" width="69" height="88" alt="Romatic" />
+                    </dt>
+                    <dd>SPORTY</dd>
+                </dl>
+                </div>
+                <div style="text-align:center"><input type="checkbox" id="sportycheck" class="check" /></div>
+            </td>
+            <td>
+                <div class="collection">
+                <dl>
+                    <dt>
+                    <img src="img/img_classic.gif" width="69" height="88" alt="Romatic" />
+                    </dt>
+                    <dd>CLASSIC</dd>
+                </dl>
+                </div>                      
+                <div style="text-align:center"><input type="checkbox" id="classiccheck" class="check" /></div>
+            </td>
+            <td>
+                <dl>
+                    <dt><img src="img/img_glamorous.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>GLAMOROUS</dd>
+                </dl>
+                <div style="text-align:center"><input type="checkbox" class="check" /></div>
+            </td>
+            <td>
+                <div>
+                <dl>
+                    <dt><img src="img/img_bohemian.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>BOHEMIAN</dd>
+                </dl>
+                </div>                
+                <div style="text-align:center"><input type="checkbox" class="check" /></div>
+            </td>
+            <td>
+                <div class="collection">
+                <dl>
+                    <dt><img src="img/img_trendy.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>TRENDY</dd>
+                </dl>
+                <div style="text-align:center"><input type="checkbox" id="trendycheck" class="check" /></div>
+            </td>
+            <td>
+                <dl>
+                    <dt><img src="img/img_comfortable.gif" width="69" height="88" alt="Romatic" /></dt>
+                    <dd>COMFORTABLE</dd>
+                </dl>
+                <div style="text-align:center"><input type="checkbox" class="check" /></div>
+            </td>
+            </tr>
+            </table>
+            
+            <div id="collectionerror" class="alerterror">You may select "Classic", "Classic/Trendy" or "Classic/Trendy/Sporty".</div>
+
+            <center style="margin:13px;"><a class="button" id="btnMixMyStyles">Mix my styles</a></center>
+            
+            </div>
+            <div id="footer">
+                <div class="links">
+                <ul>
+                    <li><a href="">About Us</a></li>
+                    <li><a href="">Terms of Use</a></li>
+                    <li><a href="">Privacy</a></li>
+                    <li><a href="">Sitemap</a></li>
+                </ul>
+                </div>
+                <span class="copyright">COPYRIGHT © 2009 ABUNDANT CLOSET LLC - ALL RIGHTS RESERVED</span>            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="classicPopup" style="text-align:center;" title="Classic" class="popup">
+<p style="font-size:13px;">Women with this style type own garments like:</p>
+
+<img src="img/img_classic_over.jpg" style="margin:5px;" />
+
+<h2>Favorite Stores:</h2>
+
+<img src="img/store_anntaylor.gif" style="margin:5px;float:left;" />
+<img src="img/logos/ralph-lauren.jpg" style="margin:5px;" />
+
+<h2>Favorite Brands:</h2>
+
+
+<img src="img/brand_lizclalborne.gif" style="margin:5px;float:right;" />
+<img src="img/logos/calvin_klein.gif" style="margin:5px;" />
+
+<center>
+    <span class="question">Still not sure if this is for you?</span>
+    <a class="button">View all garments in collection</a>
+</center>
+
+</div>
+
+<div id="trendyPopup" style="text-align:center;" title="Trendy" class="popup">
+<p style="font-size:13px;">Women with this style type own garments like:</p>
+
+<img src="img/img_trendy_over.jpg" style="margin:5px;" />
+
+<h2>Favorite Stores:</h2>
+
+<img src="img/logos/H&M.jpg" style="margin:5px;float:right;" />
+<img src="img/logos/forever21.jpg" style="margin:5px;float:left;" />
+<img src="img/logos/zara.jpg" style="margin:5px;" />
+
+<h2>Favorite Brands:</h2>
+
+<img src="img/brands_dg.gif" style="margin:5px; float:right" />
+<img src="img/logos/bcbg.jpg" style="margin:5px;" />
+
+<center>
+    <span class="question">Still not sure if this is for you?</span>
+    <a class="button">View all garments in collection</a>
+</center>
+
+</div>
+
+<div id="sportyPopup" style="text-align:center;" title="Sporty" class="popup">
+<p style="font-size:13px;">Women with this style type own garments like:</p>
+
+<img src="img/img_sporty_over.jpg" style="margin:5px;" />
+
+<h2>Favorite Stores:</h2>
+
+<img src="img/logos/bebe.gif" style="margin:5px;float:left;"/>
+<img src="img/logos/athleta.gif" style="margin:5px;" />
+
+<h2>Favorite Brands:</h2>
+
+<img src="img/logos/babypath.png" style="margin:5px; float:right" />
+<img src="img/logos/nike.jpg" style="margin:5px;" />
+
+<center>
+    <span class="question">Still not sure if this is for you?</span>
+    <a class="button">View all garments in collection</a>
+</center>
+
+</div>
+
+<div id="mix_styles" title="Style Mixer" class="popup">
+<div id="mixederror" class="alerterror">Total mixed must be 100%. Review your selection.</div>
+
+<span>How important is each collection to your personal style? Please rate how important each collection is to you.</span>
+
+<ul id="sliders"> 
+</ul>
+
+<center><a id="btnBuildMyCloset" class="button">Build My Closet</a></center>
+
+</div>
+
+</body>
+</html>
